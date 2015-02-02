@@ -42,10 +42,10 @@ function read_lazy(type) -> value_lazy
 function read_with_args(type)(args...) -> value_lazy
 // Reads an array of a given type and a given length
 function read_array(type, length) -> [values]
-function read_array_with_args(type, length)(function enumerate(i, f) { return f(args...)}) -> [values]
+function read_array_with_args(type, length)(function gen_args(i, f) { return f(args...)}) -> [values]
 // Lazily reads an array, will be processed later when asked
 function read_array_lazy(type, length) -> value_array_lazy
-function read_array_lazy_with_args(type, length)(function enumerate(i, f) { return f(args...)}) -> [values]
+function read_array_lazy_with_args(type, length)(function gen_args(i, f) { return f(args...)}) -> value_array_lazy
 
 // All movement in the buffer are relative to the struct we are in
 // Moves into the buffer to offset from the start
