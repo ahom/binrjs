@@ -14,8 +14,6 @@ $ npm install --save binread
 
 ```js
 var binread = require('binread');
-
-binread('Rainbow');
 ```
 
 ```sh
