@@ -36,12 +36,16 @@ function struct(ctx[, args...]) {
 ```js
 // Reads a type from where we are
 function read(type) -> value
+function read_with_args(type)(args...) -> value
 // Lazily reads a type, will be processed later when asked
 function read_lazy(type) -> value_lazy
+function read_with_args(type)(args...) -> value_lazy
 // Reads an array of a given type and a given length
 function read_array(type, length) -> [values]
+function read_array_with_args(type, length)(function enumerate(i, f) { return f(args...)}) -> [values]
 // Lazily reads an array, will be processed later when asked
 function read_array_lazy(type, length) -> value_array_lazy
+function read_array_lazy_with_args(type, length)(function enumerate(i, f) { return f(args...)}) -> [values]
 
 // All movement in the buffer are relative to the struct we are in
 // Moves into the buffer to offset from the start
