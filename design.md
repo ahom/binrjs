@@ -3,7 +3,7 @@
 * Represent structs as **simple functions**.
 * Provide all the following **basic types from scratch** (with endianness, default: le):
   * ```[le|be]?[u]?int[8|16|32|64]```
-  * ```[le|be]?float[32|64]```
+  * ```[le|be]?float[16|32|64]```
   * ```bytes(length)```
   * ```string[utf[8|16|32]]?(length|null-terminated)```
   * ```struct```
