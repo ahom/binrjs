@@ -99,5 +99,20 @@ describe('binread', function () {
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBF, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
         [                                           0.0,                                           -1.0]);
     });
+
+    it('must handle correctly bytes values', function () {
+      var values = [0x00, 0x01, 0xF0, 0xFF];
+      var ctx = binread.context(new DataView(new Uint8Array(values).buffer));
+
+      var bytes = binread.types.bytes;
+
+      var one_byte = bytes(ctx, 1);
+      assert.equal(one_byte[0], 0x00);
+
+      var three_bytes = bytes(ctx, 3);
+      assert.equal(three_bytes[0], 0x01);
+      assert.equal(three_bytes[1], 0xF0);
+      assert.equal(three_bytes[2], 0xFF);
+    });
   });
 });
