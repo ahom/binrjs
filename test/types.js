@@ -4,19 +4,24 @@
 var assert = require('assert');
 var binread = require('../');
 
+var get_context = function (bytes) {
+  return binread.context(new DataView(new Uint8Array(bytes).buffer));
+};
+
 var test_integers = function (type, bytes, expected) {
-  var ctx = binread.context(new DataView(new Uint8Array(bytes).buffer));
+  var ctx = get_context(bytes);
   for (var idx = 0; idx < expected.length; idx++) {
     assert.equal(ctx.read(type), expected[idx]);
   }
 };
 
 var test_floats = function (type, bytes, expected) {
-  var ctx = binread.context(new DataView(new Uint8Array(bytes).buffer));
+  var ctx = get_context(bytes);
   for (var idx = 0; idx < expected.length; idx++) {
     assert.ok(Math.abs(ctx.read(type) - expected[idx]) < 0.1);
   }
 };
+
 
 describe('binread', function () {
   describe('.types', function () {
@@ -102,8 +107,7 @@ describe('binread', function () {
     });
 
     it('must handle correctly bytes values', function () {
-      var values = [0x00, 0x01, 0xF0, 0xFF];
-      var ctx = binread.context(new DataView(new Uint8Array(values).buffer));
+      var ctx = get_context([0x00, 0x01, 0xF0, 0xFF]);
 
       var bytes = binread.types.bytes;
 
@@ -117,12 +121,11 @@ describe('binread', function () {
     });
 
     it('must handle correctly struct values', function () {
-      var values = [
+      var ctx = get_context([
         0x01, 0x02, 0x03, 0x04, // magic
         0x10, 0x00,             // major
         0x00, 0x01              // minor
-      ];
-      var ctx = binread.context(new DataView(new Uint8Array(values).buffer));
+      ]);
 
       var t = binread.types;
 
