@@ -114,5 +114,35 @@ describe('binread', function () {
       assert.equal(three_bytes[1], 0xF0);
       assert.equal(three_bytes[2], 0xFF);
     });
+
+    it('must handle correctly struct values', function () {
+      var values = [
+        0x01, 0x02, 0x03, 0x04, // magic
+        0x10, 0x00,             // major
+        0x00, 0x01              // minor
+      ];
+      var ctx = binread.context(new DataView(new Uint8Array(values).buffer));
+
+      var t = binread.types;
+
+      var struct = function (ctx) {
+        return {
+          magic: t.bytes(ctx, 4),
+          major: t.uint16(ctx),
+          minor: t.beint16(ctx)
+        };
+      };
+
+      var value = struct(ctx);
+
+      assert.equal(value.magic[0], 0x01);
+      assert.equal(value.magic[1], 0x02);
+      assert.equal(value.magic[2], 0x03);
+      assert.equal(value.magic[3], 0x04);
+
+      assert.equal(value.major, 16);
+
+      assert.equal(value.minor, 1);
+    });
   });
 });
