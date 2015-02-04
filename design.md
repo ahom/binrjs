@@ -32,7 +32,7 @@ let outputs_lazy = binread.read_array_lazy_with_args(type, length[, array_buffer
 ```js
 function struct(ctx[, args...]) {
   return {
-    magic: ctx.read(bytes(4)),
+    magic: ctx.read(bytes)(4),
     major_version: ctx.read(uint16),
     minor_version: ctx.read(uint16)
   }
