@@ -17,27 +17,4 @@ describe('binread', function () {
     assert.equal(values[0], 0x01);
     assert.equal(values[1], 0x02);
   });
-
-  it('must handle correctly read_array', function () {
-    var values = binread.read_array(types.int8, 2, [0x01, 0x02]);
-
-    assert.equal(values[0], 0x01);
-    assert.equal(values[1], 0x02);
-  });
-
-  it('must handle correctly read_array_with_args', function () {
-    var values = binread.read_array_with_args(types.bytes, 2, [0x01, 0x02, 0x03, 0x04])(function (i, f) {
-      if (i === 0) {
-        return f(1);
-      } else {
-        return f(3);
-      }
-    });
-
-    assert.equal(values[0][0], 0x01);
-
-    assert.equal(values[1][0], 0x02);
-    assert.equal(values[1][1], 0x03);
-    assert.equal(values[1][2], 0x04);
-  });
 });

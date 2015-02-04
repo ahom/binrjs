@@ -14,17 +14,8 @@
 ## binread API
 
 ```js
-let output = binread.read(type[, array_buffer[, file]])
-let output = binread.read_with_args(type[, array_buffer[, file]])(args...)
-
-let output_lazy = binread.read_lazy(type[, array_buffer[, file]])
-let output_lazy = binread.read_lazy_with_args(type[, array_buffer[, file]])(args...)
-
-let outputs = binread.read_array(type, length[, array_buffer[, file]])
-let outputs = binread.read_array_with_args(type, length[, array_buffer[, file]])(function apply_args(i, f) { return f(args...); })
-
-let outputs_lazy = binread.read_array_lazy(type, length[, array_buffer[, file]])
-let outputs_lazy = binread.read_array_lazy_with_args(type, length[, array_buffer[, file]])(function apply_args(i, f) { return f(args...); })
+let output = binread.read(type, data)
+let output = binread.read_with_args(type, data)(args...)
 ```
 
 ## struct signature
