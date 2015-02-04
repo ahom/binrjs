@@ -49,10 +49,10 @@ function read_lazy(type) -> value_lazy
 function read_lazy_with_args(type)(args...) -> value_lazy
 
 function read_array(type, length) -> [values]
-function read_array_with_args(type, length)(function apply_args(i, f) { return f(args...)}; ) -> [values]
+function read_array_with_args(type, length)(function apply_args(i, f) { return f(args...); }) -> [values]
 
 function read_array_lazy(type, length) -> value_array_lazy
-function read_array_lazy_with_args(type, length)(function apply_args(i, f) { return f(args...)}; ) -> value_array_lazy
+function read_array_lazy_with_args(type, length)(function apply_args(i, f) { return f(args...); }) -> value_array_lazy
 
 function seek(offset)
 function skip(count)
