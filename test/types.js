@@ -2,21 +2,18 @@
 'use strict';
 
 var assert = require('assert');
-var binread = require('../');
-
-var get_context = function (bytes) {
-  return binread.context(new DataView(new Uint8Array(bytes).buffer));
-};
+var types = require('../lib/types');
+var context = require('../lib/context');
 
 var test_integers = function (type, bytes, expected) {
-  var ctx = get_context(bytes);
+  var ctx = context.create_context(bytes);
   for (var idx = 0; idx < expected.length; idx++) {
     assert.equal(ctx.read(type), expected[idx]);
   }
 };
 
 var test_floats = function (type, bytes, expected) {
-  var ctx = get_context(bytes);
+  var ctx = context.create_context(bytes);
   for (var idx = 0; idx < expected.length; idx++) {
     assert.ok(Math.abs(ctx.read(type) - expected[idx]) < 0.1);
   }
@@ -26,46 +23,46 @@ var test_floats = function (type, bytes, expected) {
 describe('binread', function () {
   describe('.types', function () {
     it('must handle correctly int8 values', function () {
-      test_integers(binread.types.int8,
+      test_integers(types.int8,
         [0x00, 0x7F, 0xFF],
         [   0,  127,   -1]);
     });
     it('must handle correctly uint8 values', function () {
-      test_integers(binread.types.uint8,
+      test_integers(types.uint8,
         [0x00, 0x7F, 0xFF],
         [   0,  127,  255]);
     });
 
     it('must handle correctly int16 values', function () {
-      test_integers(binread.types.leint16,
+      test_integers(types.leint16,
         [0x00, 0x00, 0xFF, 0x7F, 0xFF, 0xFF],
         [         0,      32767,         -1]);
-      test_integers(binread.types.beint16,
+      test_integers(types.beint16,
         [0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF],
         [         0,      32767,         -1]);
     });
     it('must handle correctly uint16 values', function () {
-      test_integers(binread.types.leuint16,
+      test_integers(types.leuint16,
         [0x00, 0x00, 0xFF, 0x7F, 0xFF, 0xFF],
         [         0,      32767,      65535]);
-      test_integers(binread.types.beuint16,
+      test_integers(types.beuint16,
         [0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF],
         [         0,      32767,      65535]);
     });
 
     it('must handle correctly int32 values', function () {
-      test_integers(binread.types.leint32,
+      test_integers(types.leint32,
         [0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF],
         [                     0,             2147483647,                     -1]);
-      test_integers(binread.types.beint32,
+      test_integers(types.beint32,
         [0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF],
         [                     0,             2147483647,                     -1]);
     });
     it('must handle correctly uint32 values', function () {
-      test_integers(binread.types.leuint32,
+      test_integers(types.leuint32,
         [0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF],
         [                     0,             2147483647,             4294967295]);
-      test_integers(binread.types.beuint32,
+      test_integers(types.beuint32,
         [0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF],
         [                     0,             2147483647,             4294967295]);
     });
@@ -90,26 +87,26 @@ describe('binread', function () {
 */
 
     it('must handle correctly float32 values', function () {
-      test_floats(binread.types.lefloat32,
+      test_floats(types.lefloat32,
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xBF],
         [                   0.0,                   -1.0]);
-      test_floats(binread.types.befloat32,
+      test_floats(types.befloat32,
         [0x00, 0x00, 0x00, 0x00, 0xBF, 0x80, 0x00, 0x00],
         [                   0.0,                   -1.0]);
     });
     it('must handle correctly float64 values', function () {
-      test_floats(binread.types.lefloat64,
+      test_floats(types.lefloat64,
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0xBF],
         [                                           0.0,                                           -1.0]);
-      test_floats(binread.types.befloat64,
+      test_floats(types.befloat64,
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBF, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
         [                                           0.0,                                           -1.0]);
     });
 
     it('must handle correctly bytes values', function () {
-      var ctx = get_context([0x00, 0x01, 0xF0, 0xFF]);
+      var ctx = context.create_context([0x00, 0x01, 0xF0, 0xFF]);
 
-      var bytes = binread.types.bytes;
+      var bytes = types.bytes;
 
       var one_byte = ctx.read_with_args(bytes)(1);
       assert.equal(one_byte[0], 0x00);
@@ -121,13 +118,13 @@ describe('binread', function () {
     });
 
     it('must handle correctly struct values', function () {
-      var ctx = get_context([
+      var ctx = context.create_context([
         0x01, 0x02, 0x03, 0x04, // magic
         0x10, 0x00,             // major
         0x00, 0x01              // minor
       ]);
 
-      var t = binread.types;
+      var t = types;
 
       var struct = function () {
         return {
