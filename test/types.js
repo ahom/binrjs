@@ -1,19 +1,20 @@
 /*global describe, it */
 'use strict';
+
 var assert = require('assert');
 var binread = require('../');
 
 var test_integers = function (type, bytes, expected) {
   var ctx = binread.context(new DataView(new Uint8Array(bytes).buffer));
   for (var idx = 0; idx < expected.length; idx++) {
-    assert.equal(type(ctx), expected[idx]);
+    assert.equal(ctx.read(type), expected[idx]);
   }
 };
 
 var test_floats = function (type, bytes, expected) {
   var ctx = binread.context(new DataView(new Uint8Array(bytes).buffer));
   for (var idx = 0; idx < expected.length; idx++) {
-    assert.ok(Math.abs(type(ctx) - expected[idx]) < 0.1);
+    assert.ok(Math.abs(ctx.read(type) - expected[idx]) < 0.1);
   }
 };
 
@@ -106,10 +107,10 @@ describe('binread', function () {
 
       var bytes = binread.types.bytes;
 
-      var one_byte = bytes(ctx, 1);
+      var one_byte = ctx.read_with_args(bytes)(1);
       assert.equal(one_byte[0], 0x00);
 
-      var three_bytes = bytes(ctx, 3);
+      var three_bytes = ctx.read_with_args(bytes)(3);
       assert.equal(three_bytes[0], 0x01);
       assert.equal(three_bytes[1], 0xF0);
       assert.equal(three_bytes[2], 0xFF);
@@ -125,15 +126,15 @@ describe('binread', function () {
 
       var t = binread.types;
 
-      var struct = function (ctx) {
+      var struct = function () {
         return {
-          magic: t.bytes(ctx, 4),
-          major: t.uint16(ctx),
-          minor: t.beint16(ctx)
+          magic: this.read_with_args(t.bytes)(4),
+          major: this.read(t.uint16),
+          minor: this.read(t.beint16)
         };
       };
 
-      var value = struct(ctx);
+      var value = ctx.read(struct);
 
       assert.equal(value.magic[0], 0x01);
       assert.equal(value.magic[1], 0x02);

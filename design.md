@@ -30,11 +30,11 @@ let outputs_lazy = binread.read_array_lazy_with_args(type, length[, array_buffer
 ## struct signature
 
 ```js
-function struct(ctx[, args...]) {
+function struct(args...) {
   return {
-    magic: ctx.read(bytes)(4),
-    major_version: ctx.read(uint16),
-    minor_version: ctx.read(uint16)
+    magic: this.read_with_args(bytes)(4),
+    major_version: this.read(uint16),
+    minor_version: this.read(uint16)
   }
 }
 ```
@@ -48,11 +48,11 @@ function read_with_args(type)(args...) -> value
 function read_lazy(type) -> value_lazy
 function read_lazy_with_args(type)(args...) -> value_lazy
 
-function read_array(type, length) -> [values]
-function read_array_with_args(type, length)(function apply_args(i, f) { return f(args...); }) -> [values]
+function read_array(type, length) -> values
+function read_array_with_args(type, length)(function apply_args(i, f) { return f(args...); }) -> values
 
-function read_array_lazy(type, length) -> value_array_lazy
-function read_array_lazy_with_args(type, length)(function apply_args(i, f) { return f(args...); }) -> value_array_lazy
+function read_array_lazy(type, length) -> values_lazy
+function read_array_lazy_with_args(type, length)(function apply_args(i, f) { return f(args...); }) -> values_lazy
 
 function seek(offset)
 function skip(count)
