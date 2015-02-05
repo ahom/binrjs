@@ -17,6 +17,7 @@
     "binary"
   ],
   "dependencies": {
+    "co": "^4.1.0"
   },
   "devDependencies": {
     "grunt-cli": "^0.1.13",
