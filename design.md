@@ -49,4 +49,5 @@ function read_array_lazy_with_args(type, length)(function apply_args(i, f) { ret
 function seek(offset)
 function skip(count)
 function pos() -> uint
+function size() -> uint
 ```
