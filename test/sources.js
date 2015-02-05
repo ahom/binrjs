@@ -11,5 +11,17 @@ describe('binread', function () {
         sources();
       }, TypeError);
     });
+
+    it('must handle correctly array of bytes', function () {
+      assert.doesNotThrow(function () {
+        sources([0x00, 0x01]);
+      });
+    });
+
+    it('must handle correctly ArrayBuffers', function () {
+      assert.doesNotThrow(function () {
+        sources(new ArrayBuffer(2));
+      });
+    });
   });
 });
