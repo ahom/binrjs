@@ -23,8 +23,7 @@ module.exports = function (grunt) {
     },
     mochacli: {
       options: {
-        reporter: 'spec',
-        bail: true
+        reporter: 'spec'
       },
       all: ['test/*.js']
     },
@@ -44,5 +43,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['jshint', 'mochacli']);
+  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('test', ['jshint', 'mochacli']);
 };
