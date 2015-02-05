@@ -3,7 +3,7 @@
   * [x] Integers
   * [x] Floats
   * [x] Bytes
-* [ ] Write context for ArrayBuffer/File abstraction (without lazy reading). Starts with reading whole file in memory.
+* [ ] Write data sources for ArrayBuffer/File abstraction (without lazy reading). Starts with reading whole file in memory.
 * [ ] Write proper file handling, with lazy reading.
 * [ ] Write examples.
 * [ ] Write context lazy reading.

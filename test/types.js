@@ -4,16 +4,17 @@
 var assert = require('assert');
 var types = require('../lib/types');
 var context = require('../lib/context');
+var sources = require('../lib/sources');
 
 var test_integers = function (type, bytes, expected) {
-  var ctx = context.create_context(bytes);
+  var ctx = context(sources(bytes));
   for (var idx = 0; idx < expected.length; idx++) {
     assert.equal(ctx.read(type), expected[idx]);
   }
 };
 
 var test_floats = function (type, bytes, expected) {
-  var ctx = context.create_context(bytes);
+  var ctx = context(sources(bytes));
   for (var idx = 0; idx < expected.length; idx++) {
     assert.ok(Math.abs(ctx.read(type) - expected[idx]) < 0.1);
   }
@@ -104,7 +105,7 @@ describe('binread', function () {
     });
 
     it('must handle correctly bytes values', function () {
-      var ctx = context.create_context([0x00, 0x01, 0xF0, 0xFF]);
+      var ctx = context(sources([0x00, 0x01, 0xF0, 0xFF]));
 
       var bytes = types.bytes;
 
@@ -118,11 +119,11 @@ describe('binread', function () {
     });
 
     it('must handle correctly struct values', function () {
-      var ctx = context.create_context([
+      var ctx = context(sources([
         0x01, 0x02, 0x03, 0x04, // magic
         0x10, 0x00,             // major
         0x00, 0x01              // minor
-      ]);
+      ]));
 
       var t = types;
 

@@ -8,6 +8,7 @@
   * ```string[utf[8|16|32]]?(length|null-terminated)```
   * ```struct```
 * A read **must** advance the position in the buffer.
+* However lazy reads **do not** move the position in the buffer.
 * Handle very big files without issues: **Don't load the whole file into memory**!
 * Provide a way for **lazy reading**: When reading a very big file, make it possible to dive into it step by step. (Keep in mind the case of very long list)
 
@@ -26,7 +27,7 @@ function struct(args...) {
     magic: this.read_with_args(bytes)(4),
     major_version: this.read(uint16),
     minor_version: this.read(uint16)
-  }
+  };
 }
 ```
 
