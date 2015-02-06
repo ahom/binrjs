@@ -26,8 +26,8 @@
   },
   "scripts": {
     "test": "mocha --harmony --reporter spec",
-    "test-cov": "node --harmony node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter dot",
-    "test-travis": "node --harmony node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter dot",
+    "test-cov": "node --harmony node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec",
+    "test-travis": "node --harmony node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec",
     "browser": "browserify index.js > browser.js"
   },
   "engines": {
