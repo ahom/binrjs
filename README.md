@@ -1,4 +1,4 @@
-#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
 > Reading binary files with style.
 
@@ -33,3 +33,5 @@ MIT © [Antoine Hom]()
 [travis-image]: https://travis-ci.org/ahom/binread.svg?branch=master
 [daviddm-url]: https://david-dm.org/ahom/binread.svg?theme=shields.io
 [daviddm-image]: https://david-dm.org/ahom/binread
+[coveralls-url]: https://coveralls.io/r/ahom/binread?branch=master
+[coveralls-image]: https://coveralls.io/repos/ahom/binread/badge.svg?branch=master
