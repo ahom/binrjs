@@ -23,10 +23,10 @@ describe('binread', function () {
       assert.equal(values[1], 0x02);
     });
 
-    it('must handle correctly read_lazy', function () {
+    it('must handle correctly lazy_read', function () {
       var ctx = context(sources([0x01]));
 
-      var lazy_value = ctx.read_lazy(types.int8);
+      var lazy_value = ctx.lazy_read(types.int8);
 
       ctx.skip(1);
 
@@ -35,10 +35,10 @@ describe('binread', function () {
       assert.equal(lazy_value, 0x01);
     });
 
-    it('must handle correctly read_lazy_with_args', function () {
+    it('must handle correctly lazy_read_with_args', function () {
       var ctx = context(sources([0x01, 0x02]));
 
-      var lazy_values = ctx.read_lazy_with_args(types.bytes)(2);
+      var lazy_values = ctx.lazy_read_with_args(types.bytes)(2);
 
       ctx.skip(1);
 
@@ -75,10 +75,10 @@ describe('binread', function () {
       assert.equal(values[1][2], 0x04);
     });
 
-    it('must handle correctly read_array_lazy', function () {
+    it('must handle correctly lazy_read_array', function () {
       var ctx = context(sources([0x01, 0x02]));
 
-      var lazy_values = ctx.read_array_lazy(types.int8, 2);
+      var lazy_values = ctx.lazy_read_array(types.int8, 2);
 
       ctx.skip(1);
 
@@ -88,10 +88,10 @@ describe('binread', function () {
       assert.equal(lazy_values[1], 0x02);
     });
 
-    it('must handle correctly read_array_lazy_with_args', function () {
+    it('must handle correctly lazy_read_array_with_args', function () {
       var ctx = context(sources([0x01, 0x02, 0x03, 0x04]));
 
-      var lazy_values = ctx.read_array_lazy_with_args(types.bytes, 2)(function (i, f) {
+      var lazy_values = ctx.lazy_read_array_with_args(types.bytes, 2)(function (i, f) {
         if (i === 0) {
           return f(1);
         } else {
