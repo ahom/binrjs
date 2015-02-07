@@ -5,12 +5,13 @@ var assert = require('assert');
 
 var async_test = function (promise, done, ok) {
   promise.then(function (value) {
-    ok(value);
-    done();
-  }, function (err) {
-    assert.ok(false, err);
-    done();
-  })
+    try {
+      ok(value);
+      done();
+    } catch(err) {
+      done(err);
+    }
+  }).catch(done);
 };
 
 module.exports = {

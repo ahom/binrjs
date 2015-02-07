@@ -12,6 +12,12 @@
 * Handle very big files without issues: **Don't load the whole file into memory**!
 * Provide a way for **lazy reading**: When reading a very big file, make it possible to dive into it step by step. (Keep in mind the case of very long list)
 * Use promises and generators to make writing structs easy (async code looking sync).
+* Keep traces of reads done as a context and a potential return value (e.g: for a hex editor), each trace will have the following informations:
+  * ```type```
+  * ```value```
+  * ```offset``` (start of the read)
+  * ```size``` (end of the read)
+  * ```children``` (all reads done for this one, e.g: structs)
 
 ## binread API
 
@@ -20,6 +26,9 @@
 ```js
 let output_promise = binread.read(type, data)
 let output_promise = binread.read_with_args(type, data)(args...)
+
+let trace_promise = binread.trace_read(type, data)
+let trace_promise = binread.trace_read_with_args(type, data)(args...)
 ```
 
 ## struct signature
