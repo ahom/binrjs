@@ -1,4 +1,5 @@
-#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-url]][daviddm-image]
+#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Join the chat at https://gitter.im/ahom/binread][gitter-image]][gitter-url] [![Dependency Status][daviddm-url]][daviddm-image]
+
 
 > Reading binary files with style.
 
@@ -35,3 +36,5 @@ MIT © [Antoine Hom]()
 [daviddm-image]: https://david-dm.org/ahom/binread
 [coveralls-url]: https://coveralls.io/r/ahom/binread?branch=master
 [coveralls-image]: https://coveralls.io/repos/ahom/binread/badge.svg?branch=master
+[gitter-url]: https://gitter.im/ahom/binread?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
