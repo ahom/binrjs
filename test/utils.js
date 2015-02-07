@@ -1,7 +1,4 @@
-/*global describe, it */
 'use strict';
-
-var assert = require('assert');
 
 var async_test = function (promise, done, ok, not_set_done) {
   not_set_done = not_set_done || false;
@@ -19,4 +16,4 @@ var async_test = function (promise, done, ok, not_set_done) {
 
 module.exports = {
   async_test: async_test
-}
+};

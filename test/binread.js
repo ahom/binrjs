@@ -14,7 +14,7 @@ var test_sub_struct = function* (maj, min) {
   return {
     major: (yield this.read(types.uint16)) + maj,
     minor: (yield this.read(types.beint16)) + min
-  }
+  };
 };
 
 var test_struct = function* (maj, min) {
@@ -31,12 +31,12 @@ var test_result = {
     major: 16,
     minor: 1
   }
-}
+};
 var test_data = [
   0x01, 0x02, 0x03, 0x04, // magic
   0x10, 0x00,             // major
   0x00, 0x01              // minor
-]
+];
 
 describe('binread', function () {
   it('.read', function (done) {
