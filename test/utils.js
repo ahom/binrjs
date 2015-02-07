@@ -3,11 +3,14 @@
 
 var assert = require('assert');
 
-var async_test = function (promise, done, ok) {
+var async_test = function (promise, done, ok, not_set_done) {
+  not_set_done = not_set_done || false;
   promise.then(function (value) {
     try {
       ok(value);
-      done();
+      if (!not_set_done) {
+        done();
+      }
     } catch(err) {
       done(err);
     }

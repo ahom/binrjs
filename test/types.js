@@ -107,34 +107,5 @@ describe('binread', function () {
         assert.equal(value[2], 0xFF);
       });
     });
-
-    it('must handle correctly structs', function (done) {
-      var ctx = new Context(sources([
-        0x01, 0x02, 0x03, 0x04, // magic
-        0x10, 0x00,             // major
-        0x00, 0x01              // minor
-      ]));
-
-      var t = types;
-
-      var struct = function* () {
-        return {
-          magic: yield this.read_with_args(t.bytes)(4),
-          major: yield this.read(t.uint16),
-          minor: yield this.read(t.beint16)
-        };
-      };
-
-      async_test(ctx.read(struct), done, function (value) {
-        assert.equal(value.magic[0], 0x01);
-        assert.equal(value.magic[1], 0x02);
-        assert.equal(value.magic[2], 0x03);
-        assert.equal(value.magic[3], 0x04);
-
-        assert.equal(value.major, 16);
-
-        assert.equal(value.minor, 1);
-      });
-    });
   });
 });

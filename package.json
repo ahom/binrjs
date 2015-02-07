@@ -24,7 +24,7 @@
     "mocha": "^2.1.0"
   },
   "scripts": {
-    "test": "mocha --harmony --reporter spec --bail",
+    "test": "mocha --harmony --reporter spec",
     "test-cov": "node --harmony node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec",
     "test-travis": "node --harmony node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec",
     "browser": "browserify index.js > browser.js"
