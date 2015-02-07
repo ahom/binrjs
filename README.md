@@ -1,5 +1,7 @@
 #  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
+[![Join the chat at https://gitter.im/ahom/binread](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ahom/binread?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > Reading binary files with style.
 
 
