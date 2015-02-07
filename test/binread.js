@@ -42,9 +42,8 @@ describe('binread', function () {
   it('.read', function (done) {
     async_test(binread.read(test_struct, test_data), done, function (value) {
       assert.deepEqual(value.magic, test_result.magic);
-      assert.equal(typeof value.version, 'function');
 
-      async_test(value.version(), done, function (version_value) {
+      async_test(value.version.read(), done, function (version_value) {
         assert.deepEqual(version_value, test_result.version);
       });
     }, true);
@@ -53,9 +52,8 @@ describe('binread', function () {
   it('.read_with_args', function (done) {
     async_test(binread.read_with_args(test_struct, test_data)(1, 2), done, function (value) {
       assert.deepEqual(value.magic, test_result.magic);
-      assert.equal(typeof value.version, 'function');
 
-      async_test(value.version(), done, function (version_value) {
+      async_test(value.version.read(), done, function (version_value) {
         assert.equal(version_value.major, test_result.version.major + 1);
         assert.equal(version_value.minor, test_result.version.minor + 2);
       });
@@ -76,9 +74,7 @@ describe('binread', function () {
       assert.equal(magic_stack_trace.type.func, types.bytes);
       assert.equal(magic_stack_trace.type.args[0], 4);
 
-      assert.equal(typeof stack_trace.value.version, 'function');
-
-      async_test(stack_trace.value.version(), done, function (version_value) {
+      async_test(stack_trace.value.version.read(), done, function (version_value) {
         assert.deepEqual(version_value, test_result.version);
 
         assert.equal(stack_trace.offset, 0);
@@ -131,9 +127,7 @@ describe('binread', function () {
       assert.equal(magic_stack_trace.type.func, types.bytes);
       assert.equal(magic_stack_trace.type.args[0], 4);
 
-      assert.equal(typeof stack_trace.value.version, 'function');
-
-      async_test(stack_trace.value.version(), done, function (version_value) {
+      async_test(stack_trace.value.version.read(), done, function (version_value) {
         assert.equal(version_value.major, test_result.version.major + 1);
         assert.equal(version_value.minor, test_result.version.minor + 2);
 

@@ -28,7 +28,7 @@ describe('binread', function () {
       var lazy_value = ctx.lazy_read(types.int8);
       ctx.skip(1);
 
-      async_test(lazy_value(), done, function (value) {
+      async_test(lazy_value.read(), done, function (value) {
         assert.equal(value, 0x01);
       });
     });
@@ -38,7 +38,7 @@ describe('binread', function () {
       var lazy_values = ctx.lazy_read_with_args(types.bytes)(2);
       ctx.skip(1);
 
-      async_test(lazy_values(), done, function (value) {
+      async_test(lazy_values.read(), done, function (value) {
         assert.equal(value[0], 0x01);
         assert.equal(value[1], 0x02);
       });
@@ -72,10 +72,18 @@ describe('binread', function () {
       var lazy_values = ctx.lazy_read_array(types.int8, 2);
       ctx.skip(1);
 
-      async_test(lazy_values(), done, function (value) {
-        assert.equal(value[0], 0x01);
-        assert.equal(value[1], 0x02);
-      });
+      async_test(lazy_values.read(1), done, function (value) {
+        assert.equal(value.length, 1);
+        assert.equal(lazy_values.get(), value);
+
+        async_test(lazy_values.read(), done, function (value) {
+          assert.equal(value.length, 2);
+
+          assert.equal(value[0], 0x01);
+          assert.equal(value[1], 0x02);
+          assert.equal(lazy_values.get(), value);
+        });
+      }, true);
     });
 
     it('.lazy_read_array_with_args', function (done) {
@@ -89,7 +97,9 @@ describe('binread', function () {
       });
       ctx.skip(1);
 
-      async_test(lazy_values(), done, function (value) {
+      async_test(lazy_values.read(), done, function (value) {
+        assert.equal(value.length, 2);
+
         assert.equal(value[0][0], 0x01);
 
         assert.equal(value[1][0], 0x02);
