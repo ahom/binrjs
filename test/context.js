@@ -144,20 +144,7 @@ describe('binread', function () {
       assert.throws(function () { ctx.skip(-5); }, RangeError);
     });
 
-    it('should correctly report errors for out of bounds seek', function (done) {
-      var ctx = new Context(sources([]));
-      ctx.read(types.int8, []).then(function (value) {
-        assert.ok(false);
-        done('Nothing thrown');
-      }).catch(function (err) {
-        assert.ok(err.err instanceof RangeError);
-        assert.equal(err.stack_traces.length, 1);
-        assert.equal(err.offset, 0);
-        done();
-      });
-    });
-
-    it('should correctly report errors for reads', function (done) {
+    it('should correctly report errors for read', function (done) {
       var ctx = new Context(sources([]));
       ctx.read(types.int8, []).then(function (value) {
         assert.ok(false);
