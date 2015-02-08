@@ -166,13 +166,14 @@ describe('binread', function () {
     }, true);
   });
 
-  it('should correctly report errors', function (done) {
-    binread.read(test_struct, []).then(function (value) {
+  it('should correctly report errors for traces', function (done) {
+    binread.trace_read(types.int8, []).then(function (value) {
       assert.ok(false);
       done('Nothing thrown');
     }).catch(function (err) {
-      console.log(err);
-      assert.ok(true);
+      assert.ok(err.err instanceof RangeError);
+      assert.equal(err.stack_traces.length, 1);
+      assert.equal(err.offset, 0);
       done();
     });
   });
