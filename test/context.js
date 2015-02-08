@@ -108,7 +108,69 @@ describe('binread', function () {
       });
     });
 
+    it('seek', function () {
+      var ctx = new Context(sources([0x00, 0x00, 0x00, 0x00]));
+
+      assert.doesNotThrow(function () { ctx.seek(0); });
+      assert.doesNotThrow(function () { ctx.seek(4); });
+
+      assert.doesNotThrow(function () { ctx.seek(-1); });
+      assert.doesNotThrow(function () { ctx.seek(-4); });
+      assert.throws(function () { ctx.seek(5); }, RangeError);
+      assert.throws(function () { ctx.seek(-5); }, RangeError);
+    });
+
+    it('skip', function () {
+      var ctx = new Context(sources([0x00, 0x00, 0x00, 0x00]));
+
+      ctx.seek(0);
+      assert.doesNotThrow(function () { ctx.skip(0); });
+      ctx.seek(0);
+      assert.doesNotThrow(function () { ctx.skip(4); });
+
+      ctx.seek(0);
+      assert.throws(function () { ctx.skip(-1); }, RangeError);
+      ctx.seek(0);
+      assert.throws(function () { ctx.skip(5); }, RangeError);
+
+      ctx.seek(4);
+      assert.doesNotThrow(function () { ctx.skip(-1); });
+      ctx.seek(4);
+      assert.doesNotThrow(function () { ctx.skip(-4); });
+
+      ctx.seek(4);
+      assert.throws(function () { ctx.skip(1); }, RangeError);
+      ctx.seek(4);
+      assert.throws(function () { ctx.skip(-5); }, RangeError);
+    });
+
+    it('should correctly report errors for out of bounds seek', function (done) {
+      var ctx = new Context(sources([]));
+      ctx.read(types.int8, []).then(function (value) {
+        assert.ok(false);
+        done('Nothing thrown');
+      }).catch(function (err) {
+        assert.ok(err.err instanceof RangeError);
+        assert.equal(err.stack_traces.length, 1);
+        assert.equal(err.offset, 0);
+        done();
+      });
+    });
+
     it('should correctly report errors for reads', function (done) {
+      var ctx = new Context(sources([]));
+      ctx.read(types.int8, []).then(function (value) {
+        assert.ok(false);
+        done('Nothing thrown');
+      }).catch(function (err) {
+        assert.ok(err.err instanceof RangeError);
+        assert.equal(err.stack_traces.length, 1);
+        assert.equal(err.offset, 0);
+        done();
+      });
+    });
+
+    it('should correctly report errors for out of bounds seek', function (done) {
       var ctx = new Context(sources([]));
       ctx.read(types.int8, []).then(function (value) {
         assert.ok(false);
