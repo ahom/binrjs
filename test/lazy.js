@@ -35,6 +35,7 @@ describe('binread', function () {
       });
 
       assert.deepEqual(lazy_values.get(), []);
+      assert.equal(lazy_values.size(), 5);
 
       async_test(lazy_values.read(2), done, function (values) {
         assert.deepEqual(values, [1, 2]);
