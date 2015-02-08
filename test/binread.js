@@ -39,7 +39,7 @@ var test_data = [
 ];
 
 describe('binread', function () {
-  it('.read', function (done) {
+  it('read', function (done) {
     async_test(binread.read(test_struct, test_data), done, function (value) {
       assert.deepEqual(value.magic, test_result.magic);
 
@@ -49,7 +49,7 @@ describe('binread', function () {
     }, true);
   });
 
-  it('.read_with_args', function (done) {
+  it('read_with_args', function (done) {
     async_test(binread.read_with_args(test_struct, test_data)(1, 2), done, function (value) {
       assert.deepEqual(value.magic, test_result.magic);
 
@@ -60,7 +60,7 @@ describe('binread', function () {
     }, true);
   });
 
-  it('.trace_read', function (done) {
+  it('trace_read', function (done) {
     async_test(binread.trace_read(test_struct, test_data), done, function (stack_trace) {
       assert.equal(stack_trace.offset, 0);
       assert.equal(stack_trace.size, 4);
@@ -113,7 +113,7 @@ describe('binread', function () {
     }, true);
   });
 
-  it('.trace_read_with_args', function (done) {
+  it('trace_read_with_args', function (done) {
     async_test(binread.trace_read_with_args(test_struct, test_data)(1, 2), done, function (stack_trace) {
       assert.equal(stack_trace.offset, 0);
       assert.equal(stack_trace.size, 4);
@@ -164,5 +164,16 @@ describe('binread', function () {
         assert.equal(minor_stack_trace.type.func, types.beint16);
       });
     }, true);
+  });
+
+  it('should correctly report errors', function (done) {
+    binread.read(test_struct, []).then(function (value) {
+      assert.ok(false);
+      done('Nothing thrown');
+    }).catch(function (err) {
+      console.log(err);
+      assert.ok(true);
+      done();
+    });
   });
 });
