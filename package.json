@@ -1,19 +1,19 @@
 {
-  "name": "binread",
-  "version": "0.0.0",
+  "name": "binr",
+  "version": "0.0.1",
   "description": "Reading binary files with style.",
-  "homepage": "https://github.com/ahom/binread",
+  "homepage": "https://github.com/ahom/binr",
   "author": {
     "name": "Antoine Hom",
     "email": "antoine.hom@gmail.com"
   },
-  "repository": "ahom/binread",
+  "repository": "ahom/binr",
   "license": "MIT",
   "files": [
     "index.js"
   ],
   "keywords": [
-    "binread",
+    "binr",
     "binary"
   ],
   "dependencies": {

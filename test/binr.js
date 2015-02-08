@@ -3,11 +3,11 @@
 
 var assert = require('assert');
 var fs = require('fs');
-var binread = require('../lib/binread');
+var binr = require('../lib/binr');
 var utils = require('./utils');
 var async_test = utils.async_test;
 
-var types = binread.types;
+var types = binr.types;
 
 var test_sub_struct = function* (maj, min) {
   maj = maj || 0;
@@ -39,11 +39,11 @@ var test_data_array = [
   0x00, 0x01              // minor
 ];
 
-describe('binread', function () {
+describe('binr', function () {
   var tests = function (test_data, data_type_string) {
     describe(data_type_string, function () {
       it('read', function (done) {
-        async_test(binread.read(test_struct, test_data), done, function (value) {
+        async_test(binr.read(test_struct, test_data), done, function (value) {
           assert.deepEqual(value.magic, test_result.magic);
 
           async_test(value.version.read(), done, function (version_value) {
@@ -53,7 +53,7 @@ describe('binread', function () {
       });
 
       it('read_with_args', function (done) {
-        async_test(binread.read_with_args(test_struct, test_data)(1, 2), done, function (value) {
+        async_test(binr.read_with_args(test_struct, test_data)(1, 2), done, function (value) {
           assert.deepEqual(value.magic, test_result.magic);
 
           async_test(value.version.read(), done, function (version_value) {
@@ -64,7 +64,7 @@ describe('binread', function () {
       });
 
       it('trace_read', function (done) {
-        async_test(binread.trace_read(test_struct, test_data), done, function (stack_trace) {
+        async_test(binr.trace_read(test_struct, test_data), done, function (stack_trace) {
           assert.equal(stack_trace.offset, 0);
           assert.equal(stack_trace.size, 4);
           assert.equal(stack_trace.type.func, test_struct);
@@ -117,7 +117,7 @@ describe('binread', function () {
       });
 
       it('trace_read_with_args', function (done) {
-        async_test(binread.trace_read_with_args(test_struct, test_data)(1, 2), done, function (stack_trace) {
+        async_test(binr.trace_read_with_args(test_struct, test_data)(1, 2), done, function (stack_trace) {
           assert.equal(stack_trace.offset, 0);
           assert.equal(stack_trace.size, 4);
           assert.equal(stack_trace.type.func, test_struct);
@@ -170,7 +170,7 @@ describe('binread', function () {
       });
 
       it('should correctly report errors for traces', function (done) {
-        binread.trace_read(types.int8, []).then(function (value) {
+        binr.trace_read(types.int8, []).then(function (value) {
           assert.ok(false);
           done('Nothing thrown');
         }).catch(function (err) {

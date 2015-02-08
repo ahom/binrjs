@@ -8,7 +8,7 @@ var types = require('../lib/types');
 var utils = require('./utils');
 var async_test = utils.async_test;
 
-describe('binread', function () {
+describe('binr', function () {
   describe('.context', function () {
     it('read', function (done) {
       async_test(new Context(sources([0x01])).read(types.int8), done, function (value) {

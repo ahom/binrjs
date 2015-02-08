@@ -19,16 +19,16 @@
   * ```size``` (end of the read)
   * ```children``` (all reads done for this one, e.g: structs)
 
-## binread API
+## binr API
 
-> All binread APIs return promises.
+> All binr APIs return promises.
 
 ```js
-let output_promise = binread.read(type, data)
-let output_promise = binread.read_with_args(type, data)(args...)
+let output_promise = binr.read(type, data)
+let output_promise = binr.read_with_args(type, data)(args...)
 
-let trace_promise = binread.trace_read(type, data)
-let trace_promise = binread.trace_read_with_args(type, data)(args...)
+let trace_promise = binr.trace_read(type, data)
+let trace_promise = binr.trace_read_with_args(type, data)(args...)
 ```
 
 ## struct signature

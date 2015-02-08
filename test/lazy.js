@@ -6,7 +6,7 @@ var lazy = require('../lib/lazy');
 var utils = require('./utils');
 var async_test = utils.async_test;
 
-describe('binread', function () {
+describe('binr', function () {
   describe('.lazy', function () {
     it('LazyValue', function (done) {
       var lazy_value = lazy.LazyValue(function () {

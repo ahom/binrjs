@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./lib/binread.js');
+module.exports = require('./lib/binr.js');

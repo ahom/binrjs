@@ -10,7 +10,7 @@ var ident = function (val) {
   return val;
 };
 
-describe('binread', function () {
+describe('binr', function () {
   describe('.sources', function () {
     it('must throw on unhandled types', function () {
       assert.throws(function () {

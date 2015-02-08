@@ -24,7 +24,7 @@ var test_floats = function (type, done, bytes, expected) {
   });
 };
 
-describe('binread', function () {
+describe('binr', function () {
   describe('.types', function () {
     it('int8', function (done) {
       test_integers(types.int8, done,
