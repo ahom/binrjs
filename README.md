@@ -12,6 +12,7 @@
 This library is aimed at providing a **simple and extensible** way to read binary files while giving full informations about read operations and failures.
 
 ## Roadmap
+- Finish wiki and add comments to code
 - Add Float16/Int64 support
 - Add string support
 - Add step by step reading
