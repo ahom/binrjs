@@ -7,7 +7,10 @@ var async_test = function (promise, done, ok, not_set_done) {
     if (!not_set_done) {
       done();
     }
-  }).catch(done);
+  }).catch(function (error) {
+    console.log(error);
+    done(error);
+  });
 };
 
 module.exports = {

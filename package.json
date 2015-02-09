@@ -17,6 +17,7 @@
     "binary"
   ],
   "dependencies": {
+    "text-encoding": "^0.5.2"
   },
   "devDependencies": {
     "browserify": "^8.1.3",
