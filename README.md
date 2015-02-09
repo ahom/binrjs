@@ -13,8 +13,7 @@ This library is aimed at providing a **simple and extensible** way to read binar
 
 ## Roadmap
 - Finish wiki and add comments to code
-- Add Float16/Int64 support
-- Add string support
+- Add Int64 support
 - Add step by step reading
 - Write web hex editor focused on reverse enginnering
 
