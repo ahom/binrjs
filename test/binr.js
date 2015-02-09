@@ -186,7 +186,7 @@ describe('binr', function () {
   tests(new Uint8Array(test_data_array).buffer, 'ArrayBuffer');
   tests(new Buffer(test_data_array), 'Buffer');
 
-  var fd = fs.openSync('test.tmp', 'w');
+  var fd = fs.openSync('test_binr.tmp', 'w');
   fs.writeSync(fd, new Buffer(test_data_array), 0, test_data_array.length);
   fs.closeSync(fd);
 
