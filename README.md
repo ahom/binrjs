@@ -12,7 +12,6 @@
 This library is aimed at providing a **simple and extensible** way to read binary files while giving full informations about read operations and failures.
 
 ## Roadmap
-- Finish wiki and add comments to code
 - Add Int64 support
 - Add step by step reading
 - Write web hex editor focused on reverse enginnering
