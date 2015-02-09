@@ -119,9 +119,9 @@ describe('binr', function () {
       });
     });
 
+    var test_string = "てすと!";
     it('string8', function (done) {
-      var test_string = "てすと!";
-      var test_string_array = Array.apply([], new TextEncoder().encode(test_string));
+      var test_string_array = Array.apply([], new TextEncoder('utf-8').encode(test_string));
       var test_string_array_with_null = test_string_array.concat(0x00);
 
       async_test(new Context(sources(test_string_array)).read_with_args(types.string8)(test_string_array.length), done, function (value) {
@@ -129,6 +129,36 @@ describe('binr', function () {
         async_test(new Context(sources(test_string_array_with_null)).read_with_args(types.string8)(test_string_array_with_null.length), done, function (value) {
           assert.equal(value, test_string);
           async_test(new Context(sources(test_string_array_with_null)).read(types.string8), done, function (value) {
+            assert.equal(value, test_string);
+          });
+        }, true);
+      }, true);
+    });
+
+    it('lestring16', function (done) {
+      var test_string_array = Array.apply([], new TextEncoder('utf-16le').encode(test_string));
+      var test_string_array_with_null = test_string_array.concat(0x00, 0x00);
+
+      async_test(new Context(sources(test_string_array)).read_with_args(types.lestring16)(test_string_array.length / 2), done, function (value) {
+        assert.equal(value, test_string);
+        async_test(new Context(sources(test_string_array_with_null)).read_with_args(types.lestring16)(test_string_array_with_null.length / 2), done, function (value) {
+          assert.equal(value, test_string);
+          async_test(new Context(sources(test_string_array_with_null)).read(types.lestring16), done, function (value) {
+            assert.equal(value, test_string);
+          });
+        }, true);
+      }, true);
+    });
+
+    it('bestring16', function (done) {
+      var test_string_array = Array.apply([], new TextEncoder('utf-16be').encode(test_string));
+      var test_string_array_with_null = test_string_array.concat(0x00, 0x00);
+
+      async_test(new Context(sources(test_string_array)).read_with_args(types.bestring16)(test_string_array.length / 2), done, function (value) {
+        assert.equal(value, test_string);
+        async_test(new Context(sources(test_string_array_with_null)).read_with_args(types.bestring16)(test_string_array_with_null.length / 2), done, function (value) {
+          assert.equal(value, test_string);
+          async_test(new Context(sources(test_string_array_with_null)).read(types.bestring16), done, function (value) {
             assert.equal(value, test_string);
           });
         }, true);
