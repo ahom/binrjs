@@ -8,8 +8,11 @@ var async_test = function (promise, done, ok, not_set_done) {
       done();
     }
   }).catch(function (error) {
-    console.log(error);
-    done(error);
+    if (error.err) {
+      done(error.err);
+    } else {
+      done(error);
+    }
   });
 };
 
