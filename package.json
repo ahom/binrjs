@@ -14,7 +14,11 @@
   ],
   "keywords": [
     "binr",
-    "binary"
+    "binary",
+    "buffer",
+    "data",
+    "file",
+    "read"
   ],
   "dependencies": {
     "text-encoding": "^0.5.2"
