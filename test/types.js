@@ -2,6 +2,7 @@
 'use strict';
 
 var assert = require('assert');
+var TextEncoder = require('text-encoding').TextEncoder;
 var types = require('../lib/types');
 var Context = require('../lib/context');
 var sources = require('../lib/sources');
@@ -116,6 +117,22 @@ describe('binr', function () {
         assert.equal(value[1], 0xF0);
         assert.equal(value[2], 0xFF);
       });
+    });
+
+    it('string8', function (done) {
+      var test_string = "てすと!";
+      var test_string_array = Array.apply([], new TextEncoder().encode(test_string));
+      var test_string_array_with_null = test_string_array.concat(0x00);
+
+      async_test(new Context(sources(test_string_array)).read_with_args(types.string8)(test_string_array.length), done, function (value) {
+        assert.equal(value, test_string);
+        async_test(new Context(sources(test_string_array_with_null)).read_with_args(types.string8)(test_string_array_with_null.length), done, function (value) {
+          assert.equal(value, test_string);
+          async_test(new Context(sources(test_string_array_with_null)).read(types.string8), done, function (value) {
+            assert.equal(value, test_string);
+          });
+        }, true);
+      }, true);
     });
   });
 });
