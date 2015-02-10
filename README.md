@@ -1,7 +1,10 @@
-#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Join the chat at https://gitter.im/ahom/binr][gitter-image]][gitter-url] [![Dependency Status][daviddm-url]][daviddm-image]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]  [![Dependency Status][daviddm-url]][daviddm-image]
 
+# BINR
 
-> Reading binary files with style:
+> Reading binary files with style
+
+[![Join the chat at https://gitter.im/ahom/binr][gitter-image]][gitter-url]
 
 ## Features
 - Define your structs as **readable code**
