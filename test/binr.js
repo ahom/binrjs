@@ -2,12 +2,11 @@
 'use strict';
 
 var assert = require('assert');
-var fs = require('fs');
-var binr = require('../lib/binr');
+var binr_func = require('../lib/binr');
+var common_sources = require('../lib/sources');
+var types = require('../lib/types');
 var utils = require('./utils');
 var async_test = utils.async_test;
-
-var types = binr.types;
 
 var test_sub_struct = function* (maj, min) {
   maj = maj || 0;
@@ -39,8 +38,8 @@ var test_data_array = [
   0x00, 0x01              // minor
 ];
 
-describe('binr', function () {
-  var tests = function (test_data, data_type_string) {
+var binr_tests = function (binr, test_data, data_type_string) {
+  describe('binr', function () {
     describe(data_type_string, function () {
       it('read', function (done) {
         async_test(binr.read(test_struct, test_data), done, function (value) {
@@ -181,15 +180,15 @@ describe('binr', function () {
         });
       });
     });
-  };
-  tests(test_data_array, 'array');
-  tests(new Uint8Array(test_data_array).buffer, 'ArrayBuffer');
-  tests(new Buffer(test_data_array), 'Buffer');
+  });
+};
 
-  var filename = 'test_binr.tmp';
-  var fd = fs.openSync(filename, 'w');
-  fs.writeSync(fd, new Buffer(test_data_array), 0, test_data_array.length);
-  fs.closeSync(fd);
+var common_binr = binr_func(common_sources);
 
-  tests(filename, 'NodeFile');
-});
+binr_tests(common_binr, test_data_array, 'array');
+binr_tests(common_binr, new Uint8Array(test_data_array).buffer, 'ArrayBuffer');
+
+module.exports = {
+  binr_tests: binr_tests,
+  test_data_array: test_data_array
+};

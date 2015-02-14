@@ -26,19 +26,25 @@
   "devDependencies": {
     "browserify": "^8.1.3",
     "istanbul-harmony": "^0.3.1",
-    "mocha": "^2.1.0",
     "jshint": "^2.6.0",
-    "jshint-stylish": "^1.0.0"
+    "jshint-stylish": "^1.0.0",
+    "mocha": "^2.1.0"
   },
   "scripts": {
-    "test": "npm run-script test-jshint && npm run-script test-unit",
-    "test-unit": "node --harmony-generators node_modules/mocha/bin/mocha --harmony-generators --reporter spec",
+    "test": "npm run test-jshint && npm run test-unit",
+    "test-unit": "node --harmony-generators node_modules/mocha/bin/mocha --harmony-generators --reporter spec test/*.js test/node/*.js",
     "test-jshint": "node --harmony-generators node_modules/jshint/bin/jshint --reporter node_modules/jshint-stylish/stylish.js index.js test lib",
-    "test-cov": "node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec",
-    "test-travis": "npm run-script test-jshint && node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec",
-    "browser": "node --harmony-generators node_modules/browserify/bin/cmd index.js > browser.js"
+    "test-cov": "node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec test/*.js test/node/*.js",
+    "test-travis": "npm run-script test-jshint && node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/*.js test/node/*.js",
+    "browser": "node --harmony-generators node_modules/browserify/bin/cmd browser.js > browserified.js",
+    "browser-test": "node --harmony-generators node_modules/browserify/bin/cmd test/types.js test/sources.js test/lazy.js test/context.js test/binr.js test/browser/sources.js test/browser/binr.js > browserified_tests.js"
   },
   "engines": {
     "node": ">= 0.12.0"
+  },
+  "testling": {
+    "harness": "mocha-bdd",
+    "files": "test/*.js",
+    "reporter": "spec"
   }
 }
