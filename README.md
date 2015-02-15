@@ -133,7 +133,7 @@ binr.trace_read(struct, data).then(function (result) {
 
 ```sh
 # creates a browser.js
-$ npm run browser
+$ npm run browserified.js
 ```
 
 ## License
