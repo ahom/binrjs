@@ -13,7 +13,7 @@ var ident = function (val) {
 
 describe('binr', function () {
   describe('.node_sources', function () {
-    it('Buffers', function (done) {
+    it('Buffers', function () {
       var source = null;
       assert.doesNotThrow(function () {
         source = sources(new Buffer([0x00, 0x01]));
@@ -21,12 +21,11 @@ describe('binr', function () {
 
       assert.equal(source.size(), 2);
 
-      async_test(source.getDataView(0, 2, ident), done, function (value) {
-        assert.equal(value.byteOffset, 0);
-        assert.equal(value.byteLength, 2);
-        assert.equal(value.getUint8(0), 0x00);
-        assert.equal(value.getUint8(1), 0x01);
-      });
+      var value = source.getDataView(0, 2, ident);
+      assert.equal(value.byteOffset, 0);
+      assert.equal(value.byteLength, 2);
+      assert.equal(value.getUint8(0), 0x00);
+      assert.equal(value.getUint8(1), 0x01);
     });
 
     it('NodeFile', function (done) {

@@ -3,8 +3,6 @@
 
 var assert = require('assert');
 var sources = require('../lib/sources');
-var utils = require('./utils');
-var async_test = utils.async_test;
 
 var ident = function (val) {
   return val;
@@ -18,7 +16,7 @@ describe('binr', function () {
       }, TypeError);
     });
 
-    it('Array', function (done) {
+    it('Array', function () {
       var source = null;
       assert.doesNotThrow(function () {
         source = sources([0x00, 0x01]);
@@ -26,16 +24,15 @@ describe('binr', function () {
 
       assert.equal(source.size(), 2);
 
-      async_test(source.getDataView(0, 2, ident), done, function (value) {
-        assert.ok(value instanceof DataView);
-        assert.equal(value.byteOffset, 0);
-        assert.equal(value.byteLength, 2);
-        assert.equal(value.getUint8(0), 0x00);
-        assert.equal(value.getUint8(1), 0x01);
-      });
+      var value = source.getDataView(0, 2, ident);
+      assert.ok(value instanceof DataView);
+      assert.equal(value.byteOffset, 0);
+      assert.equal(value.byteLength, 2);
+      assert.equal(value.getUint8(0), 0x00);
+      assert.equal(value.getUint8(1), 0x01);
     });
 
-    it('ArrayBuffers', function (done) {
+    it('ArrayBuffers', function () {
       var source = null;
       assert.doesNotThrow(function () {
         source = sources(new Uint8Array([0x00, 0x01]).buffer);
@@ -43,13 +40,12 @@ describe('binr', function () {
 
       assert.equal(source.size(), 2);
 
-      async_test(source.getDataView(0, 2, ident), done, function (value) {
-        assert.ok(value instanceof DataView);
-        assert.equal(value.byteOffset, 0);
-        assert.equal(value.byteLength, 2);
-        assert.equal(value.getUint8(0), 0x00);
-        assert.equal(value.getUint8(1), 0x01);
-      });
+      var value = source.getDataView(0, 2, ident);
+      assert.ok(value instanceof DataView);
+      assert.equal(value.byteOffset, 0);
+      assert.equal(value.byteLength, 2);
+      assert.equal(value.getUint8(0), 0x00);
+      assert.equal(value.getUint8(1), 0x01);
     });
   });
 });
