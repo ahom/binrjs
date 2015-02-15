@@ -44,7 +44,13 @@
   },
   "testling": {
     "harness": "mocha-bdd",
-    "files": "test/*.js",
-    "reporter": "spec"
+    "files": ["test/*.js", "test/browser/*.js"],
+    "browsers": [
+      "ie/latest",
+      "firefox/latest",
+      "chrome/latest",
+      "safari/latest",
+      "opera/latest"
+    ]
   }
 }
