@@ -1,6 +1,6 @@
 {
   "name": "binr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Reading binary files with style.",
   "homepage": "https://github.com/ahom/binr",
   "author": {
