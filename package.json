@@ -45,12 +45,15 @@
     "test-unit": "node --harmony-generators node_modules/mocha/bin/mocha --harmony-generators --reporter spec test/*.js test/node/*.js",
     "test-jshint": "node --harmony-generators node_modules/jshint/bin/jshint --reporter node_modules/jshint-stylish/stylish.js index.js test lib",
     "test-cov": "node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec test/*.js test/node/*.js",
-    "test-travis": "npm run-script test-jshint && node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/*.js test/node/*.js",
-    "browser": "node --harmony-generators node_modules/browserify/bin/cmd browser.js > browserified.js",
+    "test-travis": "npm run test-jshint && node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/*.js test/node/*.js",
+    "browser": "node node_modules/browserify/bin/cmd --bare --standalone binr browser.js > binr.js",
     "browser-test": "node node_modules/karma/bin/karma start .karma.js --single-run --browsers Chrome",
     "browser-test-travis": "node node_modules/karma/bin/karma start .karma.js --single-run --browsers Firefox"
   },
   "engines": {
     "node": ">= 0.12.0"
+  },
+  "browser": {
+    "text-encoding": false
   }
 }

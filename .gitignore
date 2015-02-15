@@ -2,4 +2,4 @@
 npm-debug.log
 /coverage/
 /test_*.tmp
-/browserified.js
+/binr.js

@@ -1,13 +1,20 @@
-/*global describe, it */
+/*global describe, it, TextEncoder */
 'use strict';
 
 var assert = require('assert');
-var TextEncoder = require('text-encoding').TextEncoder;
 var types = require('../lib/types');
 var Context = require('../lib/context');
 var sources = require('../lib/sources');
 var utils = require('./utils');
 var async_test = utils.async_test;
+
+var TextEncoderImpl = null;
+
+if (typeof(TextEncoder) !== 'undefined') {
+  TextEncoderImpl = TextEncoder;
+} else {
+  TextEncoderImpl = require('text-encoding').TextEncoder;
+}
 
 var tests = function (type, done, bytes, expected) {
   async_test(new Context(sources(bytes)).read_array(type, expected.length), done, function (value) {
@@ -121,7 +128,7 @@ describe('binr', function () {
 
     var test_string = "てすと!";
     it('string8', function (done) {
-      var test_string_array = Array.apply([], new TextEncoder('utf-8').encode(test_string));
+      var test_string_array = Array.apply([], new TextEncoderImpl('utf-8').encode(test_string));
       var test_string_array_with_null = test_string_array.concat(0x00);
 
       async_test(new Context(sources(test_string_array)).read_with_args(types.string8)(test_string_array.length), done, function (value) {
@@ -136,7 +143,7 @@ describe('binr', function () {
     });
 
     it('lestring16', function (done) {
-      var test_string_array = Array.apply([], new TextEncoder('utf-16le').encode(test_string));
+      var test_string_array = Array.apply([], new TextEncoderImpl('utf-16le').encode(test_string));
       var test_string_array_with_null = test_string_array.concat(0x00, 0x00);
 
       async_test(new Context(sources(test_string_array)).read_with_args(types.lestring16)(test_string_array.length / 2), done, function (value) {
@@ -151,7 +158,7 @@ describe('binr', function () {
     });
 
     it('bestring16', function (done) {
-      var test_string_array = Array.apply([], new TextEncoder('utf-16be').encode(test_string));
+      var test_string_array = Array.apply([], new TextEncoderImpl('utf-16be').encode(test_string));
       var test_string_array_with_null = test_string_array.concat(0x00, 0x00);
 
       async_test(new Context(sources(test_string_array)).read_with_args(types.bestring16)(test_string_array.length / 2), done, function (value) {
