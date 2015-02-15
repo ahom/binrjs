@@ -132,8 +132,8 @@ binr.trace_read(struct, data).then(function (result) {
 > **Create a js file to use in browsers!**
 
 ```sh
-# creates a browser.js
-$ npm run browserified.js
+# creates a browserified.js
+$ npm run browser
 ```
 
 ## License
