@@ -3,4 +3,3 @@ npm-debug.log
 /coverage/
 /test_*.tmp
 /browserified.js
-/browserified_tests.js

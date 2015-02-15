@@ -25,9 +25,18 @@
   },
   "devDependencies": {
     "browserify": "^8.1.3",
+    "browserify-istanbul": "^0.1.4",
     "istanbul-harmony": "^0.3.1",
     "jshint": "^2.6.0",
     "jshint-stylish": "^1.0.0",
+    "karma-browserify": "^3.0.1",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-coverage": "^0.2.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-ie-launcher": "^0.1.5",
+    "karma-mocha": "^0.1.10",
+    "karma-opera-launcher": "^0.1.0",
+    "karma-safari-launcher": "^0.1.1",
     "mocha": "^2.1.0"
   },
   "scripts": {
@@ -37,20 +46,10 @@
     "test-cov": "node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec test/*.js test/node/*.js",
     "test-travis": "npm run-script test-jshint && node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/*.js test/node/*.js",
     "browser": "node --harmony-generators node_modules/browserify/bin/cmd browser.js > browserified.js",
-    "browser-test": "node --harmony-generators node_modules/browserify/bin/cmd test/types.js test/sources.js test/lazy.js test/context.js test/binr.js test/browser/sources.js test/browser/binr.js > browserified_tests.js"
+    "browser-test": "node node_modules/karma/bin/karma start .karma.js --single-run --browsers Chrome",
+    "browser-test-travis": "node node_modules/karma/bin/karma start .karma.js --single-run"
   },
   "engines": {
     "node": ">= 0.12.0"
-  },
-  "testling": {
-    "harness": "mocha-bdd",
-    "files": ["test/*.js", "test/browser/*.js"],
-    "browsers": [
-      "ie/latest",
-      "firefox/latest",
-      "chrome/latest",
-      "safari/latest",
-      "opera/latest"
-    ]
   }
 }
