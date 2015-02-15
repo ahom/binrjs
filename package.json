@@ -41,7 +41,7 @@
     "mocha": "^2.1.0"
   },
   "scripts": {
-    "test": "npm run test-jshint && npm run test-unit",
+    "test": "npm run test-jshint && npm run test-unit && npm run browser-test",
     "test-unit": "node --harmony-generators node_modules/mocha/bin/mocha --harmony-generators --reporter spec test/*.js test/node/*.js",
     "test-jshint": "node --harmony-generators node_modules/jshint/bin/jshint --reporter node_modules/jshint-stylish/stylish.js index.js test lib",
     "test-cov": "node --harmony-generators node_modules/istanbul-harmony/lib/cli cover node_modules/mocha/bin/_mocha -- --reporter spec test/*.js test/node/*.js",
