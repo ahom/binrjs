@@ -1,5 +1,7 @@
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]  [![Dependency Status][daviddm-url]][daviddm-image]
 
+[![browser support][testling-image]][testling-url]
+
 # BINR
 
 > Reading binary files with style
@@ -149,3 +151,5 @@ MIT © [Antoine Hom]()
 [coveralls-image]: https://coveralls.io/repos/ahom/binr/badge.svg?branch=master
 [gitter-url]: https://gitter.im/ahom/binr?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
+[testling-url]: https://ci.testling.com/ahom/binr
+[testling-image]: https://ci.testling.com/ahom/binr.png
