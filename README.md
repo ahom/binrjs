@@ -12,7 +12,7 @@
 - **Selectively** read in a **lazy** manner big arrays/objects
 - **Dig** into the parsing of your structs with **stack traces**
 
-This library is aimed at providing a **simple and extensible** way to read binary files while giving full informations about read operations and failures.
+This library aims at providing a **simple and extensible** way to read binary files while giving full informations about read operations and failures.
 
 ## Roadmap
 - Add Int64 support
