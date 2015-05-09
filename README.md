@@ -4,8 +4,6 @@
 
 > Reading binary files with style
 
-[![Join the chat at https://gitter.im/ahom/binr][gitter-image]][gitter-url]
-
 ## Features
 - Define your structs as **readable code**
 - Read files **as big as you want**
@@ -147,5 +145,3 @@ MIT © [Antoine Hom]()
 [daviddm-image]: https://david-dm.org/ahom/binr
 [coveralls-url]: https://coveralls.io/r/ahom/binr?branch=master
 [coveralls-image]: https://coveralls.io/repos/ahom/binr/badge.svg?branch=master
-[gitter-url]: https://gitter.im/ahom/binr?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
